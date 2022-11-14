@@ -3,14 +3,24 @@ import memes from "./memes";
 
 export default function Form(){
 
+    const [meme, setMeme] = React.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "http://i.imgflip.com/1bij.jpg" 
+    })
+
     function Memelog(){
-  let rand = Math.floor(Math.random() * memes.data.memes.length);
-  let memeD= memes.data.memes;
+  let rand = Math.floor(Math.random() * allMemeImages.data.memes.length);
+  let memeD= allMemeImages.data.memes;
  let img=memeD[rand].url;	
-setmemei(img);
+setMeme(prev=>(
+ {...prev,randomImage: img
+
+}));
     }
 
-    const [memei,setmemei]=React.useState(``);
+    const [allMemeImages, setAllMemeImages] = React.useState(memes)
+    
 
   
 
@@ -24,7 +34,7 @@ setmemei(img);
                 <button onClick={Memelog} className="form--button">Get new Image</button>
             </div>
 
-            <img className="meme-img" src={memei}></img>
+            <img className="meme-img" src={meme.randomImage}></img>
         </main>
     )
 }
