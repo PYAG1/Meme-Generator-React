@@ -21,7 +21,13 @@ setMeme(prev=>(
 
     const [allMemeImages, setAllMemeImages] = React.useState(memes)
     
-
+    function handleChange(event) {
+        const {name, value} = event.target
+        setMeme(prevMeme => ({
+            ...prevMeme,
+            [name]: value
+        }))
+    }
   
 
     return( 
@@ -29,16 +35,35 @@ setMeme(prev=>(
         <main>
             
             <div className="form">
-                <input type="text" placeholder="top text "className="form--input"/>
-                <input type="text" placeholder="bottom text " className="form--input"/>
+                <input type="text" 
+                placeholder="top text "
+                className="form--input" 
+                name="topText" 
+                 value={meme.topText}
+                onChange={handleChange}
+                
+                />
+
+
+
+
+                <input type="text"
+                 placeholder="bottom text " 
+                 className="form--input"
+                 
+                 name="bottomText"
+                 value={meme.bottomText}
+                 onChange={handleChange}
+                 
+                 />
                 <button onClick={Memelog} className="form--button">Get new Image</button>
             </div>
 
             <div className="meme">
             <img className="meme-img" src={meme.randomImage}></img>
 
-                <h2 className="meme--text top">One does not simply</h2>
-                <h2 className="meme--text bottom">Walk into Mordor</h2>
+                <h2 className="meme--text top">{meme.topText}</h2>
+                <h2 className="meme--text bottom">{meme.bottomText}</h2>
             </div>
 
         </main>
